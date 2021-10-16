@@ -25,12 +25,12 @@ from logins import *
 
 #setting up Outlook
 outlook = win32.Dispatch("Outlook.Application").GetNamespace("MAPI")
-olaccount = outlook.Folders.Item("MDSEMDS@rei.com")
+olaccount = outlook.Folders.Item("MDSEMDS@email.com")
 inbox = olaccount.Folders("Inbox")
-reqs = inbox.Folders("Master Data Requests")
+reqs = inbox.Folders("Folder Name Here")
 
 #Sharepoint Beginning Path
-MDSSP = "http://teamsites.rei.com/merchandising/MSR/Article_Create/"
+MDSSP = "http://URL_HERE"
 dt = datetime.now()
 
 #Excel app
@@ -39,10 +39,6 @@ excel.Visible = 0
 
 #messages and tasks in Outlook
 msgs = reqs.Items
-
-#logins
-#usern = 'jemurra'
-#passw = ''
 
 #Array
 mdbox = []
@@ -59,7 +55,7 @@ def getORGp(of, orn):
 				orgf = word.lstrip()
 				return orgf
 		else:
-			urlB = 'http://teamsites.rei.com/merchandising/MSR/Article_Create/Forms/AllItems.aspx?View={DAD173CC-F5C8-4BB6-9656-6AEC131AB58E}&FilterField1=WaypointREQ&FilterValue1='
+			urlB = 'http://teamsites_here'
 			exf = urlB + orn[-10:]
 			rSP = requests.get(exf, auth=HttpNtlmAuth(usrn, pswd))
 			for word in rSP.text.split("	"):
@@ -164,14 +160,14 @@ def sendEmail(emTo):
 	mail.send
 
 #List of people to run the process on and their email
-reqCats = ['Amy', 'Bennet', 'Brooke', 'Gary', 'Greg', 'Jeremy', 'Lori', 'Mark', 'Val', 'Michael']
-mdsemails = ['aerikso@rei.com', 'broper@rei.com', 'bronich@rei.com', 'gdegoli@rei.com', 'gbell@rei.com', 'jemurra@rei.com', 'lboyer@rei.com', 'misaacso@rei.com', 'vbank@rei.com', 'mkomats@rei.com']
+reqCats = ['Amy', 'Bennet', 'Brooke'] #names here
+mdsemails = ['name1@nope.com', 'name2@nope.com', 'name3@nope.com'] #emails here
 
 justOne = True
 runAll = False
 
 if justOne:
-	per = 'Jeremy'
+	per = 'Me'
 	peridx = reqCats.index(per)
 	getEmails(per)
 	getComments(per)
